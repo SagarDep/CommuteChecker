@@ -5,12 +5,10 @@ import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.IntentFilter;
-import android.net.wifi.ScanResult;
-import android.net.wifi.WifiManager;
 
 import java.util.Calendar;
-import java.util.List;
+
+import kr.co.sangcomz.commutechecker.service.WifiScanService;
 
 import static java.util.Calendar.DAY_OF_WEEK;
 
@@ -20,9 +18,6 @@ import static java.util.Calendar.DAY_OF_WEEK;
  * 알람을 받는 Receiver
  */
 public class AlarmReceiver extends BroadcastReceiver {
-    ScanResult scanResult;
-    WifiManager wifiManager;
-    List apList;
 
     private NotificationManager nm = null;
     Context mContext;
@@ -60,34 +55,8 @@ public class AlarmReceiver extends BroadcastReceiver {
                 break;
         }
 
-
-        wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        if (!wifiManager.isWifiEnabled())
-            wifiManager.setWifiEnabled(true);
-//        wifiManager.setWifiEnabled(false);
-        IntentFilter filter = new IntentFilter();
-        filter.addAction(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION);
-        context.getApplicationContext().registerReceiver(wifiReceiver, filter);
-        wifiManager.startScan();
-    }
-    private BroadcastReceiver wifiReceiver = new BroadcastReceiver() {
-        @Override
-        public void onReceive(Context context, Intent intent) {
-            if (intent.getAction().equals(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION)) {
-                searchWifi();
-            }
-        }
-    };
-
-    public void searchWifi() {
-        apList = wifiManager.getScanResults();
-        if (wifiManager.getScanResults() != null) {
-            int size = apList.size();
-            for (int i = 0; i < size; i++) {
-                scanResult = (ScanResult) apList.get(i);
-                System.out.println("scanResult :::: " + ((ScanResult) apList.get(i)).SSID);
-            }
-        }
+        Intent i = new Intent(context, WifiScanService.class);
+        context.startService(i);
     }
 
 }
