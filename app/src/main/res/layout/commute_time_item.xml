@@ -20,9 +20,9 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
-            android:background="#000"
+            android:background="?attr/colorAccent"
             android:textColor="#ffff"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
 
 
         <TextView
@@ -31,7 +31,7 @@
             android:layout_height="wrap_content"
             android:gravity="center"
             android:textColor="#000"
-            android:textSize="20dp" />
+            android:textSize="18dp" />
 
 
     </LinearLayout>

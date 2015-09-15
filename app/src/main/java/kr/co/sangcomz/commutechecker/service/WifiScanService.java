@@ -10,6 +10,7 @@ import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
 import android.os.Handler;
 import android.os.IBinder;
+import android.os.Vibrator;
 import android.support.annotation.Nullable;
 import android.support.v4.app.NotificationCompat;
 
@@ -30,6 +31,7 @@ public class WifiScanService extends Service {
 
     NotificationCompat.Builder mBuilder;
     NotificationManager mNotificationManager;
+
     @Override
     public void onCreate() {
         super.onCreate();
@@ -98,8 +100,15 @@ public class WifiScanService extends Service {
             }
         }
     }
+
     public void completeCommute() {
         int commuteTime = (int) (System.currentTimeMillis() / 1000L);
+
+        Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+        //long[] pattern = {200, 2000, 100, 1700, 200, 2000, 100, 1700, 200, 2000, 100, 1700};          //  무진동, 진동 순이다.
+        //vibe.vibrate(pattern, 1);                                 // 패턴을 지정하고 반복횟수를 지정  숫자 2가 계속 반복이다.
+        vibe.vibrate(1000);
+
         mBuilder = new NotificationCompat.Builder(getApplicationContext())
                 .setSmallIcon(R.mipmap.ic_walk)
                 .setContentTitle("출근 완료")

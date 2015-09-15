@@ -1,5 +1,6 @@
 package kr.co.sangcomz.commutechecker.adapter;
 
+import android.graphics.Color;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -52,7 +53,9 @@ public class CommuteTimeAdapter
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.commuteDate.setText(TimeUtils.getDateString("MM월dd일", commuteTimeBeans.get(position).getCommuteTime()));
+        if (position%2 == 0)
+            holder.commuteDate.setBackgroundColor(Color.parseColor("#000000"));
+        holder.commuteDate.setText(TimeUtils.getDateString("MM/dd", commuteTimeBeans.get(position).getCommuteTime()));
         holder.commuteTime.setText(TimeUtils.getDateString("HH:mm", commuteTimeBeans.get(position).getCommuteTime()));
     }
 

@@ -36,8 +36,8 @@ public class SetAlarm {
         }
 
         //임시 테스트///
-        cal.set(currentTime.get(Calendar.YEAR), currentTime.get(Calendar.MONTH),
-                currentTime.get(Calendar.DAY_OF_MONTH), 9, 30, 0);
+//        cal.set(currentTime.get(Calendar.YEAR), currentTime.get(Calendar.MONTH),
+//                currentTime.get(Calendar.DAY_OF_MONTH), 9, 30, 0);
         /////////////////////////////////////////////////////////
         AlarmManager alarmManager = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
         alarmManager.setRepeating(AlarmManager.RTC_WAKEUP, cal.getTimeInMillis(), 24 * 60 * 60 * 1000, appIntent);

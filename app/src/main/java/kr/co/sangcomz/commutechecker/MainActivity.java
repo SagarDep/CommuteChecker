@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         new SetAlarm(this);
         recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
-        gridLayoutManager = new GridLayoutManager(this, 3);
+        gridLayoutManager = new GridLayoutManager(this, 4);
         commuteTimeBeans = new DBAdapter(this).getCommuteTime();
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(new CommuteTimeAdapter(commuteTimeBeans));
