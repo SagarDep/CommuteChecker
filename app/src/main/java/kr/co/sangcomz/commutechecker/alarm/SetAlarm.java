@@ -37,6 +37,7 @@ public class SetAlarm {
             int time = new DBAdapter(context).getCommuteTime().get(0).getCommuteTime();
             String lastAlarm = TimeUtils.getDateString("yyyyMMdd", time);
             String today = TimeUtils.getDateString("yyyyMMdd", (int) (System.currentTimeMillis()/1000L));
+            System.out.println(lastAlarm + " " + today);
             if (lastAlarm.equals(today))
                 isToday = true;
         }
