@@ -76,7 +76,7 @@ public class DBAdapter extends SQLiteOpenHelper {
     public ArrayList<CommuteTimeBean> getCommuteTime() {
         ArrayList<CommuteTimeBean> commuteTimeBeans = new ArrayList<>();
         //Cursor c = db.query(TABLE_NAME, new String[] {ID, TIME, DATE, PERIOD, QUESTIONNUMBER, EXAMPLE, QUESTION }, null, null, null, null, null, null, null, ID + " DESC");
-        Cursor c=db.rawQuery("select * from commute_time", null);
+        Cursor c=db.rawQuery("select * from commute_time order by _id desc", null);
         if (c.moveToFirst()) {
             final int indexId = c.getColumnIndex(ID);
             final int indexCommuteTime = c.getColumnIndex(COMMUTE_TIME);
