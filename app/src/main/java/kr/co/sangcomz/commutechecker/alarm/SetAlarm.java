@@ -30,7 +30,7 @@ public class SetAlarm {
         Calendar currentTime = Calendar.getInstance();
         cal.set(currentTime.get(Calendar.YEAR), currentTime.get(Calendar.MONTH),
                 currentTime.get(Calendar.DAY_OF_MONTH), 9, 30, 0);
-        String strCurTime = TimeUtils.getDateString("hhmm", (int) currentTime.getTimeInMillis());
+        String strCurTime = TimeUtils.getDateString("HHmm", (int) (currentTime.getTimeInMillis()/1000L));
         int intCurTime = Integer.valueOf(strCurTime);
         boolean isToday = false;
         if (new DBAdapter(context).getCommuteTime().size() > 0) {
