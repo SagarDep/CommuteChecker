@@ -4,6 +4,8 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.Menu;
+import android.view.MenuItem;
 
 import java.util.ArrayList;
 
@@ -36,10 +38,30 @@ public class MainActivity extends AppCompatActivity {
         TimeUtils.getDateString("yyyy-MM-dd HH:mm:ss", (int) unixTime);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        getMenuInflater().inflate(R.menu.main_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.action_settings:
+                return true;
+            case R.id.action_remove:
+                return true;
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
+
 
     @Override
     protected void onDestroy() {
         super.onDestroy();
         System.out.println("onDestroy");
     }
+
+
 }
