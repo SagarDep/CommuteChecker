@@ -38,7 +38,8 @@ public class WifiScanService extends Service {
 
         mBuilder = new NotificationCompat.Builder(getApplicationContext())
                 .setSmallIcon(R.mipmap.ic_walk)
-                .setContentTitle("출근중");
+                .setContentTitle("출근중")
+                .setContentText("즐거운 출근");
         mNotificationManager =
                 (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 

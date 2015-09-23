@@ -76,6 +76,7 @@ public class DBAdapter extends SQLiteOpenHelper {
     public ArrayList<CommuteTimeBean> getCommuteTime() {
         ArrayList<CommuteTimeBean> commuteTimeBeans = new ArrayList<>();
         //Cursor c = db.query(TABLE_NAME, new String[] {ID, TIME, DATE, PERIOD, QUESTIONNUMBER, EXAMPLE, QUESTION }, null, null, null, null, null, null, null, ID + " DESC");
+//        Cursor c=db.rawQuery("select * from commute_time order by _id desc", null);
         Cursor c=db.rawQuery("select * from commute_time order by _id desc", null);
         if (c.moveToFirst()) {
             final int indexId = c.getColumnIndex(ID);
@@ -107,6 +108,11 @@ public class DBAdapter extends SQLiteOpenHelper {
     public boolean deleteCommuteTime(int id) {
         String[] params = new String[] { Integer.toString(id) };
         int result = db.delete(TABLE_NAME, ID + "=?", params);
+        return result > 0;
+    }
+
+    public boolean deleteAllCommuteTime() {
+        int result = db.delete(TABLE_NAME, null, null);
         return result > 0;
     }
 }

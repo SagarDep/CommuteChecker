@@ -20,19 +20,23 @@ public class MainActivity extends AppCompatActivity {
 
     RecyclerView recyclerView;
     GridLayoutManager gridLayoutManager;
-
     ArrayList<CommuteTimeBean> commuteTimeBeans;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         new SetAlarm(this);
-        recyclerView = (RecyclerView)findViewById(R.id.recycler_view);
+        recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         gridLayoutManager = new GridLayoutManager(this, 4);
         commuteTimeBeans = new DBAdapter(this).getCommuteTime();
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(new CommuteTimeAdapter(commuteTimeBeans));
 
+//        int commuteTime = (int) (System.currentTimeMillis() / 1000L);
+//        for (int i = 0; i < 10; i++) {
+//            new DBAdapter(this).insertCommuteTime(commuteTime);
+//        }
 
 
         final long unixTime = System.currentTimeMillis() / 1000L;
@@ -49,15 +53,19 @@ public class MainActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
             case R.id.action_settings:
+//                int commuteTime = (int) (System.currentTimeMillis() / 1000L);
+//                new DBAdapter(this).insertCommuteTime(commuteTime);
+//                commuteTimeBeans = new DBAdapter(this).getCommuteTime();
+//                recyclerView.setAdapter(new CommuteTimeAdapter(commuteTimeBeans));
+
                 return true;
             case R.id.action_remove:
-                Dialogs.showBasicDialog(this,
-                        "출근기록 삭제", "출근 기록이 모두 삭제됩니다.", "네", "아니오");
+                Dialogs.showDeleteDialog(this,
+                        "출근기록 삭제", "출근 기록이 모두 삭제됩니다.", "네", "아니오", recyclerView);
                 return true;
         }
         return super.onOptionsItemSelected(item);
     }
-
 
 
     @Override
