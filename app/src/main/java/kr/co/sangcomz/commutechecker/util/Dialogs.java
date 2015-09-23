@@ -37,7 +37,7 @@ public class Dialogs {
                 dialog.dismiss();
             }
         });
-        
+
         btnPositive.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
