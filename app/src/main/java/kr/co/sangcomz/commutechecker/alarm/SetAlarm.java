@@ -37,12 +37,12 @@ public class SetAlarm {
             int time = new DBAdapter(context).getCommuteTime().get(0).getCommuteTime();
             String lastAlarm = TimeUtils.getDateString("yyyyMMdd", time);
             String today = TimeUtils.getDateString("yyyyMMdd", (int) (System.currentTimeMillis()/1000L));
-            System.out.println(lastAlarm + " " + today);
             if (lastAlarm.equals(today))
                 isToday = true;
         }
 
         System.out.println("isToday :::: " + isToday);
+        System.out.println("intCurTime :::: " + intCurTime);
         if (!(intCurTime >= 930 && intCurTime < 1030) || isToday) {
             cal.add(Calendar.DATE, 1);
         }

@@ -13,6 +13,7 @@ import kr.co.sangcomz.commutechecker.adapter.CommuteTimeAdapter;
 import kr.co.sangcomz.commutechecker.alarm.SetAlarm;
 import kr.co.sangcomz.commutechecker.bean.CommuteTimeBean;
 import kr.co.sangcomz.commutechecker.db.DBAdapter;
+import kr.co.sangcomz.commutechecker.util.Dialogs;
 import kr.co.sangcomz.commutechecker.util.TimeUtils;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
             case R.id.action_settings:
                 return true;
             case R.id.action_remove:
+                Dialogs.showBasicDialog(this,
+                        "출근기록 삭제", "출근 기록이 모두 삭제됩니다.", "네", "아니오");
                 return true;
         }
         return super.onOptionsItemSelected(item);

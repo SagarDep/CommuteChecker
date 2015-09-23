@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item>
+        <shape xmlns:android="http://schemas.android.com/apk/res/android">
+
+            <solid android:color="#ffffff" />
+
+
+            <corners android:radius="3dp" />
+
+
+        </shape>
+
+        <!--<shadow-->
+        <!--android:shadowColor="#ffff00"-->
+        <!--android:shadowDx="10"-->
+        <!--android:shadowDy="10"-->
+        <!--android:shadowRadius="20"-->
+        <!--/>-->
+
+
+    </item>
+</selector>
