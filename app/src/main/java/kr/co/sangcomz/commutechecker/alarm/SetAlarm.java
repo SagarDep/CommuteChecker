@@ -29,14 +29,14 @@ public class SetAlarm {
         //9시 30분으로 맞추기
         Calendar currentTime = Calendar.getInstance();
         cal.set(currentTime.get(Calendar.YEAR), currentTime.get(Calendar.MONTH),
-                currentTime.get(Calendar.DAY_OF_MONTH), 9, 20, 0);
-        String strCurTime = TimeUtils.getDateString("HHmm", (int) (currentTime.getTimeInMillis()/1000L));
+                currentTime.get(Calendar.DAY_OF_MONTH), 9, 23, 0);
+        String strCurTime = TimeUtils.getDateString("HHmm", (int) (currentTime.getTimeInMillis() / 1000L));
         int intCurTime = Integer.valueOf(strCurTime);
         boolean isToday = false;
         if (new DBAdapter(context).getCommuteTime().size() > 0) {
             int time = new DBAdapter(context).getCommuteTime().get(0).getCommuteTime();
             String lastAlarm = TimeUtils.getDateString("yyyyMMdd", time);
-            String today = TimeUtils.getDateString("yyyyMMdd", (int) (System.currentTimeMillis()/1000L));
+            String today = TimeUtils.getDateString("yyyyMMdd", (int) (System.currentTimeMillis() / 1000L));
             if (lastAlarm.equals(today))
                 isToday = true;
         }

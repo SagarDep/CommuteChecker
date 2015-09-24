@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
@@ -21,12 +22,17 @@ public class MainActivity extends AppCompatActivity {
     RecyclerView recyclerView;
     GridLayoutManager gridLayoutManager;
     ArrayList<CommuteTimeBean> commuteTimeBeans;
+    Toolbar toolbar;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         new SetAlarm(this);
+        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_walk);
         recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         gridLayoutManager = new GridLayoutManager(this, 4);
         commuteTimeBeans = new DBAdapter(this).getCommuteTime();

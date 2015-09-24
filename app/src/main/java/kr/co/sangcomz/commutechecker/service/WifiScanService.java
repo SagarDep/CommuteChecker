@@ -103,22 +103,30 @@ public class WifiScanService extends Service {
     }
 
     public void completeCommute() {
-        int commuteTime = (int) (System.currentTimeMillis() / 1000L);
 
-        Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
-        //long[] pattern = {200, 2000, 100, 1700, 200, 2000, 100, 1700, 200, 2000, 100, 1700};          //  무진동, 진동 순이다.
-        //vibe.vibrate(pattern, 1);                                 // 패턴을 지정하고 반복횟수를 지정  숫자 2가 계속 반복이다.
-        vibe.vibrate(1000);
+        int time = new DBAdapter(getApplicationContext()).getCommuteTime().get(0).getCommuteTime();
+        String lastAlarm = TimeUtils.getDateString("yyyyMMdd", time);
+        String today = TimeUtils.getDateString("yyyyMMdd", (int) (System.currentTimeMillis() / 1000L));
+        if (!lastAlarm.equals(today)) {
+            int commuteTime = (int) (System.currentTimeMillis() / 1000L);
 
-        mBuilder = new NotificationCompat.Builder(getApplicationContext())
-                .setSmallIcon(R.mipmap.ic_walk)
-                .setContentTitle("출근 완료")
-                .setContentText("출근 시간 : " + String.valueOf(TimeUtils.getDateString("HH:mm", commuteTime)));
-        mNotificationManager =
-                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+            Vibrator vibe = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+            //long[] pattern = {200, 2000, 100, 1700, 200, 2000, 100, 1700, 200, 2000, 100, 1700};          //  무진동, 진동 순이다.
+            //vibe.vibrate(pattern, 1);                                 // 패턴을 지정하고 반복횟수를 지정  숫자 2가 계속 반복이다.
+            vibe.vibrate(1000);
 
-        mNotificationManager.notify(1, mBuilder.build());
-        dbAdapter.insertCommuteTime(commuteTime);
-        handler.removeCallbacks(runnable);
+            mBuilder = new NotificationCompat.Builder(getApplicationContext())
+                    .setSmallIcon(R.mipmap.ic_walk)
+                    .setContentTitle("출근 완료")
+                    .setContentText("출근 시간 : " + String.valueOf(TimeUtils.getDateString("HH:mm", commuteTime)));
+            mNotificationManager =
+                    (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+            mNotificationManager.notify(1, mBuilder.build());
+            dbAdapter.insertCommuteTime(commuteTime);
+            handler.removeCallbacks(runnable);
+        }
+
+
     }
 }
