@@ -1,5 +1,6 @@
 package kr.co.sangcomz.commutechecker;
 
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
@@ -28,13 +29,14 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     CollapsingToolbarLayout collapsingToolbarLayout;
     AppBarLayout appBarLayout;
-    int titleId;
+    TextView txtTime;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         new SetAlarm(this);
+        txtTime = (TextView) findViewById(R.id.txt_time);
         toolbar = (Toolbar) findViewById(R.id.toolbar);
         appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
         collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
@@ -47,33 +49,27 @@ public class MainActivity extends AppCompatActivity {
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(new CommuteTimeAdapter(commuteTimeBeans));
 
-        titleId = getResources().getIdentifier("action_bar_title", "id", "android");
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
+        collapsingToolbarLayout.setExpandedTitleColor(Color.parseColor("#00ffffff"));
 
-        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
-                System.out.println("비율 :::: " + i / appBarLayout.getTotalScrollRange());
-                System.out.println("appBarLayout.getTotalScrollRange() :::: " + appBarLayout.getTotalScrollRange());
-                System.out.println("ofset :::: " + i);
-
-                if(i / appBarLayout.getTotalScrollRange() == 0){
-                    TextView abTitle = (TextView) findViewById(titleId);
-//                    abTitle.setTextColor(Color.parseColor());
-                }
-
-
-            }
-        });
+        if (new DBAdapter(getApplicationContext()).getCommuteTime().size() > 0) {
+            int time = new DBAdapter(getApplicationContext()).getCommuteTime().get(0).getCommuteTime();
+            String lastAlarm = TimeUtils.getDateString("yyyyMMdd", time);
+            String today = TimeUtils.getDateString("yyyyMMdd", (int) (System.currentTimeMillis() / 1000L));
+            if (lastAlarm.equals(today)) {
+                txtTime.setText("Today\n" + TimeUtils.getDateString("HH시 mm분", time));
+            } else
+                txtTime.setText("Today\n-");
+        }else
+            txtTime.setText("Today\n-");
 
 
 //        int commuteTime = (int) (System.currentTimeMillis() / 1000L);
-//        for (int i = 0; i < 1; i++) {
-//            new DBAdapter(this).insertCommuteTime(commuteTime);
-//        }
+//        new DBAdapter(this).insertCommuteTime(commuteTime);
 
 
-        final long unixTime = System.currentTimeMillis() / 1000L;
-        TimeUtils.getDateString("yyyy-MM-dd HH:mm:ss", (int) unixTime);
+//        final long unixTime = System.currentTimeMillis() / 1000L;
+//        TimeUtils.getDateString("yyyy-MM-dd HH:mm:ss", (int) unixTime);
     }
 
     @Override
@@ -99,13 +95,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-
-    @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        System.out.println("onDestroy");
-    }
-
-
 }

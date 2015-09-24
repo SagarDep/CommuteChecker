@@ -25,24 +25,41 @@
             app:expandedTitleMarginStart="48dp"
             app:layout_scrollFlags="scroll|exitUntilCollapsed">
 
-            <ImageView
-                android:id="@+id/backdrop"
-                android:layout_width="match_parent"
-                android:layout_height="240dp"
-                android:background="@drawable/toolbar_background_1"
-                app:layout_collapseMode="parallax" />
 
-            <ImageView
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="240dp"
-                android:background="#50ffffff"
-                app:layout_collapseMode="parallax" />
+                app:layout_collapseMode="parallax">
+
+                <ImageView
+                    android:id="@+id/backdrop"
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:background="@drawable/toolbar_background_1" />
+
+                <ImageView
+                    android:layout_width="match_parent"
+                    android:layout_height="240dp"
+                    android:background="#40000000" />
+
+                <TextView
+                    android:id="@+id/txt_time"
+                    android:textSize="40dp"
+                    android:gravity="center"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:textColor="#ffffff" />
+
+            </RelativeLayout>
+
 
             <android.support.v7.widget.Toolbar
                 android:id="@+id/toolbar"
                 android:layout_width="match_parent"
                 android:layout_height="?attr/actionBarSize"
                 app:layout_collapseMode="pin" />
+
         </android.support.design.widget.CollapsingToolbarLayout>
 
         <!--https://developer.android.com/reference/android/support/design/widget/TabLayout.html-->
