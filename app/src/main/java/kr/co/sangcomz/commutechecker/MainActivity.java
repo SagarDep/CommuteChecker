@@ -1,6 +1,8 @@
 package kr.co.sangcomz.commutechecker;
 
 import android.os.Bundle;
+import android.support.design.widget.AppBarLayout;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -23,13 +25,17 @@ public class MainActivity extends AppCompatActivity {
     GridLayoutManager gridLayoutManager;
     ArrayList<CommuteTimeBean> commuteTimeBeans;
     Toolbar toolbar;
+    CollapsingToolbarLayout collapsingToolbarLayout;
+    AppBarLayout appBarLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         new SetAlarm(this);
-        toolbar = (Toolbar)findViewById(R.id.toolbar);
+        toolbar = (Toolbar) findViewById(R.id.toolbar);
+        appBarLayout = (AppBarLayout) findViewById(R.id.appbar);
+        collapsingToolbarLayout = (CollapsingToolbarLayout) findViewById(R.id.collapsing_toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeAsUpIndicator(R.mipmap.ic_walk);
@@ -38,9 +44,20 @@ public class MainActivity extends AppCompatActivity {
         commuteTimeBeans = new DBAdapter(this).getCommuteTime();
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(new CommuteTimeAdapter(commuteTimeBeans));
+//
+//        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+//            @Override
+//            public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
+//                System.out.println("비율 :::: " + i / appBarLayout.getTotalScrollRange());
+//                System.out.println("appBarLayout.getTotalScrollRange() :::: " + appBarLayout.getTotalScrollRange());
+//                System.out.println("ofset :::: " + i);
+//
+//            }
+//        });
+
 
 //        int commuteTime = (int) (System.currentTimeMillis() / 1000L);
-//        for (int i = 0; i < 10; i++) {
+//        for (int i = 0; i < 1; i++) {
 //            new DBAdapter(this).insertCommuteTime(commuteTime);
 //        }
 
