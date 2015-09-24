@@ -9,6 +9,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import java.util.ArrayList;
 
@@ -27,6 +28,7 @@ public class MainActivity extends AppCompatActivity {
     Toolbar toolbar;
     CollapsingToolbarLayout collapsingToolbarLayout;
     AppBarLayout appBarLayout;
+    int titleId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,16 +46,24 @@ public class MainActivity extends AppCompatActivity {
         commuteTimeBeans = new DBAdapter(this).getCommuteTime();
         recyclerView.setLayoutManager(gridLayoutManager);
         recyclerView.setAdapter(new CommuteTimeAdapter(commuteTimeBeans));
-//
-//        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-//            @Override
-//            public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
-//                System.out.println("비율 :::: " + i / appBarLayout.getTotalScrollRange());
-//                System.out.println("appBarLayout.getTotalScrollRange() :::: " + appBarLayout.getTotalScrollRange());
-//                System.out.println("ofset :::: " + i);
-//
-//            }
-//        });
+
+        titleId = getResources().getIdentifier("action_bar_title", "id", "android");
+
+        appBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
+            @Override
+            public void onOffsetChanged(AppBarLayout appBarLayout, int i) {
+                System.out.println("비율 :::: " + i / appBarLayout.getTotalScrollRange());
+                System.out.println("appBarLayout.getTotalScrollRange() :::: " + appBarLayout.getTotalScrollRange());
+                System.out.println("ofset :::: " + i);
+
+                if(i / appBarLayout.getTotalScrollRange() == 0){
+                    TextView abTitle = (TextView) findViewById(titleId);
+//                    abTitle.setTextColor(Color.parseColor());
+                }
+
+
+            }
+        });
 
 
 //        int commuteTime = (int) (System.currentTimeMillis() / 1000L);
