@@ -103,10 +103,14 @@ public class WifiScanService extends Service {
     }
 
     public void completeCommute() {
-
-        int time = new DBAdapter(getApplicationContext()).getCommuteTime().get(0).getCommuteTime();
-        String lastAlarm = TimeUtils.getDateString("yyyyMMdd", time);
-        String today = TimeUtils.getDateString("yyyyMMdd", (int) (System.currentTimeMillis() / 1000L));
+        int time;
+        String lastAlarm ="lastAlarm";
+        String today="today";
+        if (new DBAdapter(getApplicationContext()).getCommuteTime().size() > 0) {
+            time = new DBAdapter(getApplicationContext()).getCommuteTime().get(0).getCommuteTime();
+            lastAlarm = TimeUtils.getDateString("yyyyMMdd", time);
+            today = TimeUtils.getDateString("yyyyMMdd", (int) (System.currentTimeMillis() / 1000L));
+        }
         if (!lastAlarm.equals(today)) {
             int commuteTime = (int) (System.currentTimeMillis() / 1000L);
 

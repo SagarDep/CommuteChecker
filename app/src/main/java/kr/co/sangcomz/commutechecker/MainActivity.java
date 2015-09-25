@@ -1,9 +1,15 @@
 package kr.co.sangcomz.commutechecker;
 
+import android.app.NotificationManager;
+import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.design.widget.AppBarLayout;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -60,12 +66,35 @@ public class MainActivity extends AppCompatActivity {
                 txtTime.setText("Today\n" + TimeUtils.getDateString("HH시 mm분", time));
             } else
                 txtTime.setText("Today\n-");
-        }else
+        } else
             txtTime.setText("Today\n-");
 
 
+        ////////////////////test Source/////////////
+
+        Resources resources = getResources();
+        Bitmap largeIcon = BitmapFactory.decodeResource(resources, R.mipmap.ic_launcher);
+
+        NotificationCompat.InboxStyle inboxStyle =
+                new NotificationCompat.InboxStyle();
+        NotificationCompat.Builder mBuilder;
+        NotificationManager mNotificationManager;
+        mBuilder = new NotificationCompat.Builder(getApplicationContext())
+                .setColor(Color.parseColor("#4CAF50"))
+                .setSmallIcon(R.mipmap.ic_walk)
+//                .addAction(R.mipmap.ic_walk, "Previous", new PendingIntent()) // #0
+                .setStyle(inboxStyle)
+                .setContentTitle("출근중")
+                .setContentText("즐거운 출근");
+        mNotificationManager =
+                (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
+
+        mNotificationManager.notify(1, mBuilder.build());
+        //////////////////////
 //        int commuteTime = (int) (System.currentTimeMillis() / 1000L);
-//        new DBAdapter(this).insertCommuteTime(commuteTime);
+//        for (int i = 0; i < 20; i++) {
+//            new DBAdapter(this).insertCommuteTime(commuteTime);
+//        }
 
 
 //        final long unixTime = System.currentTimeMillis() / 1000L;

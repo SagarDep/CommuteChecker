@@ -55,6 +55,8 @@ public class CommuteTimeAdapter
     public void onBindViewHolder(ViewHolder holder, int position) {
         if (position%2 == 1)
             holder.commuteDate.setBackgroundColor(Color.parseColor("#000000"));
+        else
+            holder.commuteDate.setBackgroundColor(Color.parseColor("#4CAF50"));
         holder.commuteDate.setText(TimeUtils.getDateString("MM/dd", commuteTimeBeans.get(position).getCommuteTime()));
         holder.commuteTime.setText(TimeUtils.getDateString("HH:mm", commuteTimeBeans.get(position).getCommuteTime()));
     }

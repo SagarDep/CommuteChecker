@@ -55,8 +55,10 @@ public class AlarmReceiver extends BroadcastReceiver {
                 break;
         }
 
-        Intent i = new Intent(context, WifiScanService.class);
-        context.startService(i);
+        if (isCommute) {
+            Intent i = new Intent(context, WifiScanService.class);
+            context.startService(i);
+        }
     }
 
 }
