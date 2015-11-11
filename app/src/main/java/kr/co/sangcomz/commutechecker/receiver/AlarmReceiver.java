@@ -30,6 +30,8 @@ public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         mContext = context;
+
+
         nm = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
         switch (dateAndtime.get(DAY_OF_WEEK)) {
             case 1:
